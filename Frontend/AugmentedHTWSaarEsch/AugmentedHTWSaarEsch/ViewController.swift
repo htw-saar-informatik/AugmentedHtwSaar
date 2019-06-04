@@ -34,11 +34,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         ARView.autoenablesDefaultLighting = true
         ARView.scene = ARScene
         
+        print("yah")
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //May be changed to ARImagetrackingConfiguration
+        //Could be changed dy
         let configuartion = ARWorldTrackingConfiguration()
         configuartion.detectionImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)
         ARView.session.run(configuartion)

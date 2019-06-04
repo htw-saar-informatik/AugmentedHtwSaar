@@ -59,10 +59,10 @@
                                 <rect key="frame" x="370" y="564" width="145" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <state key="normal" title="Passwort vergessen?"/>
+                                <state key="normal" title="Shortcut"/>
                                 <connections>
-                                    <action selector="buttonForgetPassword:" destination="IGg-hT-gHe" eventType="touchUpInside" id="Agy-aJ-1HL"/>
                                     <action selector="registerButton:" destination="IGg-hT-gHe" eventType="touchUpInside" id="JJs-MY-fi3"/>
+                                    <action selector="shortcutButtonPressed:" destination="IGg-hT-gHe" eventType="touchUpInside" id="nMD-Hq-NzW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tl5-kT-fEp">

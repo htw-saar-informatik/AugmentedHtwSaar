@@ -32,6 +32,14 @@ class LoginViewController: UIViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    //TODO fix dump user or delete it
+    @IBAction func shortcutButtonPressed(_ sender: UIButton) {
+        //use of let or var with value acessed type struct
+        var dumpUser = User(benutzerID: 0000, benutzername: "dumpUser", passwort: "dumpUser", eMail: "dump@user.de", name: "dump", vorname: "dumpy", rollenID: 0, rollenBezeichnung: "Student")
+        self.user = dumpUser
+        
+        performSegue(withIdentifier: "segueToScanner", sender: self)
+    }
     @IBAction func loginButton(_ sender: Any) {
         
         
@@ -56,12 +64,6 @@ class LoginViewController: UIViewController{
 
         
     }
-    
-    
-    @IBAction func buttonForgetPassword(_ sender: Any) {
-        displayAlertMessage(userMessage: "Entschuldigen Sie die Unannehmlichkeiten", additionalMessage: "Diese Funktion ist leider noch nicht implementiert")
-    }
-    
     
     @IBAction func registerButton(_ sender: Any) {
     }
