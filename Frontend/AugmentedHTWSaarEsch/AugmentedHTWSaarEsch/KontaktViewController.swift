@@ -72,7 +72,7 @@ class KontaktViewController: UIViewController, UITextFieldDelegate {
         //Optional Unwrapping mittels guard let - Konstrukt
         guard let text = nachrichtenTextField.text else { return true }
         
-        let newLength = text.characters.count  + string.characters.count - range.length
+        let newLength = text.count  + string.count - range.length
         var count = limit - newLength
         if(count == -1) {
             count = 0
