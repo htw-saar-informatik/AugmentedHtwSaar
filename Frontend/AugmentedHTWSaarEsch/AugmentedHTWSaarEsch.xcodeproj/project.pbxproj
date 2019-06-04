@@ -270,13 +270,16 @@
 				TargetAttributes = {
 					EB6CDD0B2121B00F0083E7A6 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1020;
 					};
 					EB6CDD1F2121B0100083E7A6 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = EB6CDD0B2121B00F0083E7A6;
 					};
 					EB6CDD2A2121B0100083E7A6 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = EB6CDD0B2121B00F0083E7A6;
 					};
 				};
@@ -575,7 +578,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicolas.klein;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -594,7 +597,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicolas.klein;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -614,7 +617,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = AugmentedHTW.AugmentedHTWSaarEschTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AugmentedHTWSaarEsch.app/AugmentedHTWSaarEsch";
 			};
@@ -635,7 +638,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = AugmentedHTW.AugmentedHTWSaarEschTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AugmentedHTWSaarEsch.app/AugmentedHTWSaarEsch";
 			};
@@ -655,7 +658,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = AugmentedHTW.AugmentedHTWSaarEschUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = AugmentedHTWSaarEsch;
 			};
@@ -675,7 +678,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = AugmentedHTW.AugmentedHTWSaarEschUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = AugmentedHTWSaarEsch;
 			};

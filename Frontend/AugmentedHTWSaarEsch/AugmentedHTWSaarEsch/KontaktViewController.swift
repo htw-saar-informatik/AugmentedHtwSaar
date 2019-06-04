@@ -84,9 +84,9 @@ class KontaktViewController: UIViewController, UITextFieldDelegate {
     
     func displayMyAlertMessage(userMessage: String){
         
-        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert);
+        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertController.Style.alert);
         
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil);
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil);
         
         myAlert.addAction(okAction);
         

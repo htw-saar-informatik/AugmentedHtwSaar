@@ -36,7 +36,7 @@ class PdfUmwandler {
             context.beginPage()
             
             let font = UIFont.boldSystemFont(ofSize: 12)
-            let attributes = [NSAttributedStringKey.font: font]
+            let attributes = [NSAttributedString.Key.font: font]
             
             text.draw(in: CGRect(x: 0, y: 0, width: 500, height: 700), withAttributes: attributes)
         }
