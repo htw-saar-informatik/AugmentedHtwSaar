@@ -31,6 +31,9 @@ class Brett{
     Das Anzeigen der URL oder anderer Informationen auf dem Schwarzen Brett führt dazu, dass
     alle anderen Views nicht benutzbar sind, der Fehler konnt nicht gefunden werden
     */
+    /*
+     TODO: Delete useless attribute NicolasKlein
+     */
     func erzeugeSchwarzesBrett(imageName: String, raum: Raum) -> SCNNode {
         
         let request = URLRequest(url: URL(string: raum.htwSeite!)!)

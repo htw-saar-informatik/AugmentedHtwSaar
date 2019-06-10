@@ -51,6 +51,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             btnVersteckeBtnView.isHidden = true
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        test()
+    }
 
     /*
      Funktion zum erkennen von gespeicherten Bildern. Diese Methode braucht mehr Speicher als das
@@ -84,6 +88,28 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                 
             }
         }
+    }
+    
+    /*
+     Test function, to get the board to show. Just to grasp understanding for last semesters work.
+     */
+    func test(){
+        zeigeButtons()
+        
+        let alert = UIAlertController(title: "R808", message: "Zum Schließen lange gedrückt halten", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+        
+        keinBrettAngezeigt = false
+        
+        raum = Raum.init(raumnummer: 1000, verantwortlicher: user, raumartID: 1, raumartBezeichnung: "Spassraum", htwSeite: "www.google.com")
+        let planeNode = brett.erzeugeSchwarzesBrett(imageName: "Bla", raum:raum)
+        guard let currentFrame = ARView.session.currentFrame else {return}
+        var translation = matrix_identity_float4x4
+        translation.columns.3.z = -1 // entfernung von kamera
+        planeNode.simdTransform = matrix_multiply(currentFrame.camera.transform,translation)
+        
+        ARScene.rootNode.addChildNode(planeNode)
     }
     
     
