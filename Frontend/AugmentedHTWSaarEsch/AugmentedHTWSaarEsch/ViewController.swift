@@ -8,7 +8,7 @@
 
 import UIKit
 import ARKit
-import SceneKit
+//import SceneKit
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
@@ -43,6 +43,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         //May be changed to ARImagetrackingConfiguration
         //Could be changed dy
         let configuartion = ARWorldTrackingConfiguration()
+        //isnt doing anything in our case
+        //configuartion.planeDetection = .horizontal
         configuartion.detectionImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)
         ARView.session.run(configuartion)
         if keinBrettAngezeigt {
@@ -51,9 +53,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             btnVersteckeBtnView.isHidden = true
         }
     }
+
     
     override func viewDidAppear(_ animated: Bool) {
-        test()
+        //test()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        ARView.session.pause()
     }
 
     /*
@@ -62,34 +69,79 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
      ARKITs ist
     */
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        if keinBrettAngezeigt {
-            
-            
-            guard let imageAnchor = anchor as? ARImageAnchor else {return}
-            
-            guard let currentFrame = ARView.session.currentFrame else {return}
-            var translation = matrix_identity_float4x4
-            translation.columns.3.z = -1 // entfernung von kamera
-            
-            if let imageName = imageAnchor.referenceImage.name {
-                raum = restSchnittstelleRaum.getRaumInformation(raumnummer: Int(imageName)!)
-                zeigeButtons()
+        if true {
+        
+            if let imageAnchor = anchor as? ARImageAnchor {
+                let name = imageAnchor.referenceImage.name!
+                print("you found a \(name) image")
                 
-                let alert = UIAlertController(title: imageName, message: "Zum Schließen lange gedrückt halten", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                present(alert, animated: true, completion: nil)
-                
-                
-                keinBrettAngezeigt = false
-                let planeNode = brett.erzeugeSchwarzesBrett(imageName: imageName, raum:raum)
-                planeNode.simdTransform = matrix_multiply(currentFrame.camera.transform,translation)
-                ARScene.rootNode.addChildNode(planeNode)
-                
-                
+                let size = imageAnchor.referenceImage.physicalSize
+                let videoNode = makeText(size: size)
+                node.addChildNode(videoNode)
+                node.opacity = 1
+                node.scale = SCNVector3(0.02, 0.02, 0.02)
             }
         }
     }
     
+    func makeVideo(size: CGSize) -> SCNNode{
+        // 1
+        guard let videoURL = Bundle.main.url(forResource: "slovenia",
+                                             withExtension: "mp4") else {
+                                                print("No Video found!")
+                                                return SCNNode()
+        }
+        
+        // 2
+        let avPlayerItem = AVPlayerItem(url: videoURL)
+        let avPlayer = AVPlayer(playerItem: avPlayerItem)
+        avPlayer.play()
+        
+        // 3
+        NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime,
+            object: nil,
+            queue: nil) { notification in
+                avPlayer.seek(to: .zero)
+                avPlayer.play()
+        }
+        
+        // 4
+        let avMaterial = SCNMaterial()
+        avMaterial.diffuse.contents = avPlayer
+        
+        // 5
+        let videoPlane = SCNPlane(width: size.width, height: size.height)
+        videoPlane.materials = [avMaterial]
+        
+        // 6
+        let videoNode = SCNNode(geometry: videoPlane)
+        videoNode.eulerAngles.x = -.pi / 2
+        return videoNode
+    }
+    
+    func makeText(size: CGSize) -> SCNNode{
+        let text = SCNText(string: "Hello", extrusionDepth: 0.9)
+        text.materials.first?.diffuse.contents = UIColor.green
+        let textNode = SCNNode(geometry: text)
+        //textNode.position = SCNVector3(0.5,0.5,-1)
+        textNode.eulerAngles.x = (.pi / 2) //Make the text stand up straight (90 Degrees
+        textNode.eulerAngles.z = .pi // Rotate it by 180 degrees
+
+        return textNode
+    }
+    
+    func makePlane(size: CGSize) -> SCNNode{
+        
+        // 5
+        let videoPlane = SCNPlane(width: size.width, height: size.height)
+        videoPlane.materials.first?.diffuse.contents = UIColor.green
+        
+        // 6
+        let videoNode = SCNNode(geometry: videoPlane)
+        videoNode.eulerAngles.x = -.pi / 2
+        return videoNode
+    }
     /*
      Test function, to get the board to show. Just to grasp understanding for last semesters work.
      */
@@ -102,7 +154,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         keinBrettAngezeigt = false
         
-        raum = Raum.init(raumnummer: 1000, verantwortlicher: user, raumartID: 1, raumartBezeichnung: "Spassraum", htwSeite: "www.google.com")
+        raum = Raum.init(raumnummer: 1000, verantwortlicher: user, raumartID: nil, raumartBezeichnung: "Spassraum", htwSeite: "www.google.com")
         let planeNode = brett.erzeugeSchwarzesBrett(imageName: "Bla", raum:raum)
         guard let currentFrame = ARView.session.currentFrame else {return}
         var translation = matrix_identity_float4x4

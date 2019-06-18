@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37FBDFC522B7EF0500C47CB3 /* slovenia.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 37FBDFC422B7EF0500C47CB3 /* slovenia.mp4 */; };
 		711D4434214A85F6000B0CF1 /* Kontakt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711D4433214A85F6000B0CF1 /* Kontakt.swift */; };
 		711D4438214FB0DB000B0CF1 /* SeiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711D4437214FB0DB000B0CF1 /* SeiteViewController.swift */; };
 		713BB32F2122124D00D3033C /* Raum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713BB32E2122124D00D3033C /* Raum.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37FBDFC422B7EF0500C47CB3 /* slovenia.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = slovenia.mp4; sourceTree = "<group>"; };
 		4F8B18C13A45AE511193BAA4 /* Pods-AugmentedHTWSaarEsch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AugmentedHTWSaarEsch.release.xcconfig"; path = "Pods/Target Support Files/Pods-AugmentedHTWSaarEsch/Pods-AugmentedHTWSaarEsch.release.xcconfig"; sourceTree = "<group>"; };
 		711D4433214A85F6000B0CF1 /* Kontakt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kontakt.swift; sourceTree = "<group>"; };
 		711D4437214FB0DB000B0CF1 /* SeiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeiteViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				EB64A6E52134CE3200A07A83 /* ShowAlterMessage.swift */,
 				71E1380D2136B59F0026FD8A /* RestSchnittstelleKontakt.swift */,
 				711D4433214A85F6000B0CF1 /* Kontakt.swift */,
+				37FBDFC422B7EF0500C47CB3 /* slovenia.mp4 */,
 			);
 			path = AugmentedHTWSaarEsch;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37FBDFC522B7EF0500C47CB3 /* slovenia.mp4 in Resources */,
 				EB6CDD1A2121B0100083E7A6 /* LaunchScreen.storyboard in Resources */,
 				EB6CDD172121B0100083E7A6 /* Assets.xcassets in Resources */,
 				EB6CDD152121B00F0083E7A6 /* Main.storyboard in Resources */,

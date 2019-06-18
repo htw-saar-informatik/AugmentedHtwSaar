@@ -30,6 +30,8 @@ class Brett{
     Erzeugt einen virtuellen Bildschirm, der eine URL anzeigt
     Das Anzeigen der URL oder anderer Informationen auf dem Schwarzen Brett führt dazu, dass
     alle anderen Views nicht benutzbar sind, der Fehler konnt nicht gefunden werden
+     
+     Schwarzes Brett bleibt leer
     */
     /*
      TODO: Delete useless attribute NicolasKlein
