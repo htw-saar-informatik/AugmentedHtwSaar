@@ -32,6 +32,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         ARView.delegate = self
         ARView.session.delegate = self
         ARView.autoenablesDefaultLighting = true
+        ARView.automaticallyUpdatesLighting = true
         ARView.scene = ARScene
         
         print("yah")
@@ -43,10 +44,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         //May be changed to ARImagetrackingConfiguration
         //Could be changed dy
         let configuartion = ARWorldTrackingConfiguration()
-        //isnt doing anything in our case
-        //configuartion.planeDetection = .horizontal
-        configuartion.detectionImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)
+        //rederer(didAdd:)
+        configuartion.planeDetection = .vertical
+        //all renderer
+        //configuartion.detectionImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil)
+        
+        ARView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         ARView.session.run(configuartion)
+        
         if keinBrettAngezeigt {
             viewFuerButtons.isHidden = true
             btnZeigeBtnView.isHidden = true
@@ -70,7 +75,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     */
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if true {
-        
             if let imageAnchor = anchor as? ARImageAnchor {
                 let name = imageAnchor.referenceImage.name!
                 print("you found a \(name) image")
@@ -84,6 +88,43 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         }
     }
     
+    /*
+     Gets called if a plane is found somewhere in the viewfinder.
+     If thats the case, a coloured simple plane gets added to the found plane.
+     >> Only works if no images are searched. Can be fixed by searching for horizontal planes,
+        not vertical ones.
+    */
+    
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        
+        print ("Did enter plane detection renderer")
+        
+        guard let planeAnchor = anchor as? ARPlaneAnchor else {return}
+        
+        let width = CGFloat(planeAnchor.extent.x)
+        let height = CGFloat(planeAnchor.extent.z)
+        
+        let plane = SCNPlane(width: width, height: height)
+        
+        plane.materials.first?.diffuse.contents = UIColor.green
+        
+        let planeNode = SCNNode(geometry: plane)
+        
+        let x = CGFloat(planeAnchor.center.x)
+        let y = CGFloat(planeAnchor.center.y)
+        let z = CGFloat(planeAnchor.center.z)
+        
+        planeNode.position = SCNVector3(x,y,z)
+        
+        planeNode.eulerAngles.x = -.pi/2
+
+        node.addChildNode(planeNode)
+        node.opacity = 1
+     }
+    
+    /*
+     Adds a playing video if a reference image is found.
+    */
     func makeVideo(size: CGSize) -> SCNNode{
         // 1
         guard let videoURL = Bundle.main.url(forResource: "slovenia",
