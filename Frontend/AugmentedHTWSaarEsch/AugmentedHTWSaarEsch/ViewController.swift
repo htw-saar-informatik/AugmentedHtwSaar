@@ -125,7 +125,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         text.materials.first?.diffuse.contents = UIColor.green
         let textNode = SCNNode(geometry: text)
         //textNode.position = SCNVector3(0.5,0.5,-1)
-        textNode.eulerAngles.x = (.pi / 2) //Make the text stand up straight (90 Degrees
+        //textNode.eulerAngles.x = (.pi / 2) //Make the text stand up straight (90 Degrees)
+        textNode.eulerAngles.x = 90.degreesToRadians.swf
         textNode.eulerAngles.z = .pi // Rotate it by 180 degrees
 
         return textNode
@@ -164,6 +165,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         ARScene.rootNode.addChildNode(planeNode)
     }
     
+    /*
+     This time around we want to play with geometries, materials and nodes,
+     to get a grasp of how they work together.
+     */
+    func test2(){
+        let torus = SCNNode(geometry: SCNTorus(ringRadius: 0.05, pipeRadius: 0.03))
+        torus.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+        torus.geometry?.firstMaterial?.specular.contents = UIColor.red
+        torus.position = SCNVector3(0.5, 0, -1)
+        torus.eulerAngles.z = .pi / 4
+    }
     
     /*
      Hilfsfunktion zur Implementierung des Slide out Menüs
@@ -240,5 +252,38 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
      */
     @IBAction func unwindZurueckZuHauptansicht(sender: UIStoryboardSegue){}
     
+    
+    /*
+     Nativ swift has no methods to convert from degrees to radians.
+     These helper methods solve this problem.
+     The sinpi implementation even is at a very low level implemented
+     in a way, which is more efficiant than multiplying by pi yourself.
+    */
+    
+    func sin(degrees: Double) -> Double {
+        return __sinpi(degrees/180.0)
+    }
+    
+    func sin(degrees: Float) -> Float {
+        return __sinpif(degrees/180.0)
+    }
+    
+    func sin(degrees: CGFloat) -> CGFloat {
+        return CGFloat(sin(degrees: degrees.native))
+    }
+    
+}
+
+extension BinaryInteger {
+    var degreesToRadians: CGFloat { return CGFloat(self) * .pi / 180 }
+}
+
+extension FloatingPoint {
+    var degreesToRadians: Self { return self * .pi / 180 }
+    var radiansToDegrees: Self { return self * 180 / .pi }
+}
+
+extension CGFloat {
+    var swf: Float { return Float(self) }
 }
 
