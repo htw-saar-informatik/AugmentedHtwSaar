@@ -56,7 +56,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     
     override func viewDidAppear(_ animated: Bool) {
-        //test()
+        //test2()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -125,9 +125,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         text.materials.first?.diffuse.contents = UIColor.green
         let textNode = SCNNode(geometry: text)
         //textNode.position = SCNVector3(0.5,0.5,-1)
-        //textNode.eulerAngles.x = (.pi / 2) //Make the text stand up straight (90 Degrees)
-        textNode.eulerAngles.x = 90.degreesToRadians.swf
-        textNode.eulerAngles.z = .pi // Rotate it by 180 degrees
+        textNode.eulerAngles.x = 90.degreesToRadians.swf // make text straigth up
+        textNode.eulerAngles.z = 180.degreesToRadians.swf // roate it by 180 degrees
 
         return textNode
     }
@@ -174,9 +173,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         torus.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
         torus.geometry?.firstMaterial?.specular.contents = UIColor.red
         torus.position = SCNVector3(0.5, 0, -1)
-        torus.eulerAngles.z = .pi / 4
+        torus.eulerAngles.z = 40.degreesToRadians.swf
+        
+        ARScene.rootNode.addChildNode(torus)
     }
-    
     /*
      Hilfsfunktion zur Implementierung des Slide out Menüs
      */
@@ -251,26 +251,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
      aufgerufen werden
      */
     @IBAction func unwindZurueckZuHauptansicht(sender: UIStoryboardSegue){}
-    
-    
-    /*
-     Nativ swift has no methods to convert from degrees to radians.
-     These helper methods solve this problem.
-     The sinpi implementation even is at a very low level implemented
-     in a way, which is more efficiant than multiplying by pi yourself.
-    */
-    
-    func sin(degrees: Double) -> Double {
-        return __sinpi(degrees/180.0)
-    }
-    
-    func sin(degrees: Float) -> Float {
-        return __sinpif(degrees/180.0)
-    }
-    
-    func sin(degrees: CGFloat) -> CGFloat {
-        return CGFloat(sin(degrees: degrees.native))
-    }
     
 }
 
